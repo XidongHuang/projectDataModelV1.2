@@ -68,6 +68,33 @@ public class RootObject<T> {
 		
 		return mapper.load(clazz, hashKey);
 	}
+	
+	public T loadByMapper(String hashKey, String rangeKey) {
+		client = Initial.getClient();
+		mapper = new DynamoDBMapper(client);
+		
+		return mapper.load(clazz, hashKey, rangeKey);
+	}
+	
+	
+	public T loadByMapper(Integer hashKey, String rangeKey) {
+		client = Initial.getClient();
+		mapper = new DynamoDBMapper(client);
+		
+		return mapper.load(clazz, hashKey, rangeKey);
+	}
+	public T loadByMapper(String hashKey, Integer rangeKey) {
+		client = Initial.getClient();
+		mapper = new DynamoDBMapper(client);
+		
+		return mapper.load(clazz, hashKey, rangeKey);
+	}
+	public T loadByMapper(Integer hashKey, Integer rangeKey) {
+		client = Initial.getClient();
+		mapper = new DynamoDBMapper(client);
+		
+		return mapper.load(clazz, hashKey, rangeKey);
+	}
 
 	
 	
@@ -97,6 +124,64 @@ public class RootObject<T> {
 			client = Initial.getClient();
 			mapper = new DynamoDBMapper(client);
 			item = loadByMapper(hashKey);
+			
+			mapper.delete(item);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteByMapper(String hashKey, Integer rangeKey){
+		T item = null;
+		
+		try {
+			client = Initial.getClient();
+			mapper = new DynamoDBMapper(client);
+			item = loadByMapper(hashKey, rangeKey);
+			
+			mapper.delete(item);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteByMapper(Integer hashKey, Integer rangeKey){
+		T item = null;
+		
+		try {
+			client = Initial.getClient();
+			mapper = new DynamoDBMapper(client);
+			item = loadByMapper(hashKey, rangeKey);
+			
+			mapper.delete(item);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+	public void deleteByMapper(Integer hashKey, String rangeKey){
+		T item = null;
+		
+		try {
+			client = Initial.getClient();
+			mapper = new DynamoDBMapper(client);
+			item = loadByMapper(hashKey, rangeKey);
+			
+			mapper.delete(item);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+	public void deleteByMapper(String hashKey, String rangeKey){
+		T item = null;
+		
+		try {
+			client = Initial.getClient();
+			mapper = new DynamoDBMapper(client);
+			item = loadByMapper(hashKey, rangeKey);
 			
 			mapper.delete(item);
 		} catch (Exception e) {
