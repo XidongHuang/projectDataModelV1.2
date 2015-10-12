@@ -21,7 +21,7 @@ public class TestInstructor {
 		List<Staff> staff = staffDM.loadStaffByAccountName("ashley");
 		Integer staffID = staff.get(0).getStaffID();
 		
-		String instructorName = "Tony Huang";
+		String instructorName = staff.get(0).getStaffName();
 		
 		List<Integer> levelID = new ArrayList<Integer>();
 		levelID.add(1);
@@ -41,6 +41,7 @@ public class TestInstructor {
 		
 		staff = staffDM.loadStaffByAccountName("XiongHuang");
 		staffID = staff.get(0).getStaffID();
+		instructorName = staff.get(0).getStaffName();
 		
 		levelID.clear();
 		levelID.add(3);

@@ -61,10 +61,10 @@ public class TestCourse {
 				levelID, instructorID, studentAmount, 
 				students, attendance, passRate, failStudentAmount);
 		
-		
-		
-		
 		courseDM.saveACourse(course);
+		
+		
+		
 		
 	}
 	

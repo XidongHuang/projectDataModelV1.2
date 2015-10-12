@@ -19,7 +19,7 @@ public interface InstructorDM {
 	
 	public List<Instructor> loadInstructorByUpload(Integer upload);
 	
-	public static List<Instructor> scanByUpload(Condition condition){
+	static List<Instructor> scanByUpload(Condition condition){
 		
 		DynamoDBMapper mapper = Initial.getMapper();
 		

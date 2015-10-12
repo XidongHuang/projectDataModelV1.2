@@ -19,7 +19,7 @@ public interface StaffDM {
 	
 	public List<Staff> loadStaffByAccountName(String accountName);
 	
-	public static List<Staff> scanByAccountName(Condition condition){
+	static List<Staff> scanByAccountName(Condition condition){
 		DynamoDBMapper mapper = Initial.getMapper();
 		
 		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
