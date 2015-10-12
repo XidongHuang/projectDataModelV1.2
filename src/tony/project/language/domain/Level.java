@@ -20,7 +20,7 @@ public class Level extends RootObject<Level> implements LevelDM {
 	private List<Integer> students;
 	private Double failRate;
 	private Integer failStudentAmount;
-	private List<Integer> failStudent;
+	private List<Integer> failStudents;
 	
 
 	
@@ -58,8 +58,8 @@ public class Level extends RootObject<Level> implements LevelDM {
 	public void setFailStudentAmount(Integer failStudentAmount) {this.failStudentAmount = failStudentAmount;}
 	
 	@DynamoDBAttribute(attributeName="FailStudent")
-	public List<Integer> getFailStudent() {return failStudent;}
-	public void setFailStudent(List<Integer> failStudent) {this.failStudent = failStudent;}
+	public List<Integer> getFailStudent() {return failStudents;}
+	public void setFailStudent(List<Integer> failStudents) {this.failStudents = failStudents;}
 	
 	
 	public Level(Integer levelID, String semester, String levelNO, List<String> courses, Integer studentAmount,
@@ -73,7 +73,7 @@ public class Level extends RootObject<Level> implements LevelDM {
 		this.students = students;
 		this.failRate = failRate;
 		this.failStudentAmount = failStudentAmount;
-		this.failStudent = failStudent;
+		this.failStudents = failStudent;
 	}
 	
 	
@@ -86,7 +86,7 @@ public class Level extends RootObject<Level> implements LevelDM {
 	public String toString() {
 		return "Level [levelID=" + levelID + ", semester=" + semester + ", levelNO=" + levelNO + ", courses=" + courses
 				+ ", studentAmount=" + studentAmount + ", students=" + students + ", failRate=" + failRate
-				+ ", failStudentAmount=" + failStudentAmount + ", failStudent=" + failStudent + "]";
+				+ ", failStudentAmount=" + failStudentAmount + ", failStudent=" + failStudents + "]";
 	}
 	@Override
 	public void saveALevel(Level level) {

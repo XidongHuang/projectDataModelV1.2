@@ -17,6 +17,8 @@ import tony.project.language.interfaces.InstructorDM;
 public class Instructor extends RootObject<Instructor> implements InstructorDM {
 
 	private Integer staffID;
+	private String instructorName;
+
 	private List<Integer> levelID;
 	private List<String> courses;
 	private Boolean upload;
@@ -25,6 +27,11 @@ public class Instructor extends RootObject<Instructor> implements InstructorDM {
 	@DynamoDBHashKey(attributeName="StaffID")
 	public Integer getStaffID() {return staffID;}
 	public void setStaffID(Integer staffID) {this.staffID = staffID;}
+	
+	@DynamoDBAttribute(attributeName="InstructorName")
+	public String getInstructorName() {return instructorName;}
+	public void setInstructorName(String instructorName) {this.instructorName = instructorName;}
+	
 	
 	@DynamoDBAttribute(attributeName="LevelID")
 	public List<Integer> getLevelID() {return levelID;}
@@ -44,9 +51,12 @@ public class Instructor extends RootObject<Instructor> implements InstructorDM {
 	public void setEvaluation(Boolean evaluation) {this.evaluation = evaluation;}
 	
 	
-	public Instructor(Integer staffID, List<Integer> levelID, List<String> courses, Boolean upload, Boolean evaluation) {
+	
+	public Instructor(Integer staffID, String instructorName, List<Integer> levelID, List<String> courses,
+			Boolean upload, Boolean evaluation) {
 		super();
 		this.staffID = staffID;
+		this.instructorName = instructorName;
 		this.levelID = levelID;
 		this.courses = courses;
 		this.upload = upload;
@@ -57,10 +67,11 @@ public class Instructor extends RootObject<Instructor> implements InstructorDM {
 		super();
 	}
 	
+	
 	@Override
 	public String toString() {
-		return "Instructor [staffID=" + staffID + ", levelID=" + levelID + ", courses=" + courses + ", upload=" + upload
-				+ ", evaluation=" + evaluation + "]";
+		return "Instructor [staffID=" + staffID + ", instructorName=" + instructorName + ", levelID=" + levelID
+				+ ", courses=" + courses + ", upload=" + upload + ", evaluation=" + evaluation + "]";
 	}
 	
 	

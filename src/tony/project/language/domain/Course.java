@@ -19,6 +19,7 @@ public class Course extends RootObject<Course> implements CourseDM {
 	private Integer studentAmount;
 	private List<Integer> students;
 	private Double attendance;
+	private Double passRate;
 	private Integer failStudentAmount;
 	
 	@DynamoDBHashKey(attributeName="CourseCode")
@@ -53,16 +54,20 @@ public class Course extends RootObject<Course> implements CourseDM {
 	public Double getAttendance() {return attendance;}
 	public void setAttendance(Double attendance) {this.attendance = attendance;}
 	
+	@DynamoDBAttribute(attributeName="PassRate")
+	public Double getPassRate() {return passRate;}
+	public void setPassRate(Double passRate) {this.passRate = passRate;}
+	
+	
 	@DynamoDBAttribute(attributeName="FailStudentAmount")
 	public Integer getFailStudentAmount() {return failStudentAmount;}
 	public void setFailStudentAmount(Integer failStudentAmount) {this.failStudentAmount = failStudentAmount;}
 	
 	
-	public Course(
-			String courseCode, String semester, String courseName, 
-			Integer levelID, Integer instructorID,
-			Integer studentAmount, List<Integer> students, 
-			Double attendance, Integer failStudentAmount) {
+	
+	public Course(String courseCode, String semester, String courseName, Integer levelID, Integer instructorID,
+			Integer studentAmount, List<Integer> students, Double attendance, Double passRate,
+			Integer failStudentAmount) {
 		super();
 		this.courseCode = courseCode;
 		this.semester = semester;
@@ -72,6 +77,7 @@ public class Course extends RootObject<Course> implements CourseDM {
 		this.studentAmount = studentAmount;
 		this.students = students;
 		this.attendance = attendance;
+		this.passRate = passRate;
 		this.failStudentAmount = failStudentAmount;
 	}
 	
@@ -79,13 +85,17 @@ public class Course extends RootObject<Course> implements CourseDM {
 		super();
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "Course [courseCode=" + courseCode + ", semester=" + semester + ", courseName=" + courseName
 				+ ", levelID=" + levelID + ", instructorID=" + instructorID + ", studentAmount=" + studentAmount
-				+ ", students=" + students + ", attendance=" + attendance + ", failStudentAmount=" + failStudentAmount
-				+ "]";
+				+ ", students=" + students + ", attendance=" + attendance + ", passRate=" + passRate
+				+ ", failStudentAmount=" + failStudentAmount + "]";
 	}
+	
+	
+	
 	@Override
 	public void saveACourse(Course course) {
 

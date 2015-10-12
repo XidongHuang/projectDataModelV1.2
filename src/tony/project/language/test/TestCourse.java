@@ -30,13 +30,15 @@ public class TestCourse {
 		
 		Double attendance = 0.05;
 		
+		Double passRate = 0.97;
+		
 		Integer failStudentAmount = 2;
 		
 		
 		
-		Course course = new Course(courseCode, semester, courseName, 
-				levelID, instructorID, studentAmount, students, 
-				attendance, failStudentAmount);
+		Course course = new Course(courseCode, semester, courseName, levelID, 
+				instructorID, studentAmount, students, 
+				attendance, passRate, failStudentAmount);
 		
 		
 		courseCode = "16SSpe";
@@ -55,9 +57,9 @@ public class TestCourse {
 		attendance = 0.03;
 		failStudentAmount = 1;
 		
-		course = new Course(courseCode, semester, courseName,
-				levelID, instructorID, studentAmount, students, 
-				attendance, failStudentAmount);
+		course = new Course(courseCode, semester, courseName, 
+				levelID, instructorID, studentAmount, 
+				students, attendance, passRate, failStudentAmount);
 		
 		
 		

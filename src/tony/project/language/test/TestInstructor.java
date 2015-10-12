@@ -21,6 +21,8 @@ public class TestInstructor {
 		List<Staff> staff = staffDM.loadStaffByAccountName("ashley");
 		Integer staffID = staff.get(0).getStaffID();
 		
+		String instructorName = "Tony Huang";
+		
 		List<Integer> levelID = new ArrayList<Integer>();
 		levelID.add(1);
 		levelID.add(2);
@@ -32,8 +34,8 @@ public class TestInstructor {
 		Boolean upload = false;
 		Boolean evaluation = true;
 		
-		Instructor instructor = new Instructor(staffID, levelID, courses, 
-				upload, evaluation);
+		Instructor instructor = new Instructor(staffID, instructorName, 
+				levelID, courses, upload, evaluation);
 		
 		instructorDM.savaAInstructor(instructor);
 		
@@ -51,7 +53,7 @@ public class TestInstructor {
 		upload = false;
 		evaluation = false;
 		
-		instructor = new Instructor(staffID, levelID, courses, upload, evaluation);
+		instructor = new Instructor(staffID, instructorName, levelID, courses, upload, evaluation);
 		instructorDM.savaAInstructor(instructor);
 		
 	}
