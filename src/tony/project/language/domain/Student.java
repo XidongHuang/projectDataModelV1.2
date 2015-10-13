@@ -89,12 +89,6 @@ public class Student extends RootObject<Student> implements StudentDM {
 			Map<String, Double> attendance, Map<String, Double> scores,
 			Integer graduation, Integer pass) {
 		
-		
-//		Student(Integer, String, String, Integer, List<String>, String, 
-//				String, String, Map<String,Double>, Map<String,Double>, 
-//				Integer, Integer)
-		
-		
 		super();
 		this.studentID = studentID;
 		this.firstName = firstName;
@@ -145,10 +139,6 @@ public class Student extends RootObject<Student> implements StudentDM {
 
 		deleteByMapper(studentID);
 	}
-	
-	
-	
-	
 	
 	
 }

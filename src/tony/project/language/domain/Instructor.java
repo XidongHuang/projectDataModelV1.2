@@ -18,7 +18,6 @@ public class Instructor extends RootObject<Instructor> implements InstructorDM {
 
 	private Integer staffID;
 	private String instructorName;
-
 	private List<Integer> levelID;
 	private List<String> courses;
 	private Boolean upload;
