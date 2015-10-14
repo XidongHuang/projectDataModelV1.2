@@ -43,11 +43,9 @@ public class TestStaff {
 		Staff staff = staffDM.loadAStaff(004);
 		System.out.println(staff);
 		
-		List<Staff> staffs = staffDM.loadStaffByAccountName("Hardy");
-		Iterator sta = staffs.iterator();
-		while(sta.hasNext()){
-			System.out.println(sta.next());
-		}
+		Staff staffs = staffDM.loadStaffByAccountName("Hanna");
+		
+			System.out.println(staffs);
 	}
 	
 	@Test

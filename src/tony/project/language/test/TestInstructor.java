@@ -18,10 +18,10 @@ public class TestInstructor {
 	
 	@Test
 	public void testSave(){
-		List<Staff> staff = staffDM.loadStaffByAccountName("ashley");
-		Integer staffID = staff.get(0).getStaffID();
+		Staff staff = staffDM.loadStaffByAccountName("ashley");
+		Integer staffID = staff.getStaffID();
 		
-		String instructorName = staff.get(0).getStaffName();
+		String instructorName = staff.getStaffName();
 		
 		List<Integer> levelID = new ArrayList<Integer>();
 		levelID.add(1);
@@ -40,8 +40,8 @@ public class TestInstructor {
 		instructorDM.savaAInstructor(instructor);
 		
 		staff = staffDM.loadStaffByAccountName("XiongHuang");
-		staffID = staff.get(0).getStaffID();
-		instructorName = staff.get(0).getStaffName();
+		staffID = staff.getStaffID();
+		instructorName = staff.getStaffName();
 		
 		levelID.clear();
 		levelID.add(3);

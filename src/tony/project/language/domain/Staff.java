@@ -91,15 +91,20 @@ public class Staff extends RootObject<Staff> implements StaffDM{
 	}
 	
 	
-	public List<Staff> loadStaffByAccountName(String accountName){
+	public Staff loadStaffByAccountName(String accountName){
+		Staff staff = null;
 		
 		Condition condition = new Condition()
 				.withComparisonOperator(ComparisonOperator.EQ)
 				.withAttributeValueList(new AttributeValue().withS(accountName));
 		
 		List<Staff> staffs = StaffDM.scanByAccountName(condition);
+		if(staffs.size() == 1){
+			staff = staffs.get(0);
+			
+		}
 		
-		return staffs;
+		return staff;
 		
 		
 	}

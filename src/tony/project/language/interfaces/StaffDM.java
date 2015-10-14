@@ -17,7 +17,7 @@ public interface StaffDM {
 	
 	public void deleteAStaff(Integer staffID);
 	
-	public List<Staff> loadStaffByAccountName(String accountName);
+	public Staff loadStaffByAccountName(String accountName);
 	
 	static List<Staff> scanByAccountName(Condition condition){
 		DynamoDBMapper mapper = Initial.getMapper();
