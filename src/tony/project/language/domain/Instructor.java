@@ -6,11 +6,14 @@ import javax.management.AttributeList;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
 import com.amazonaws.services.dynamodbv2.model.Condition;
 
+import tony.project.language.initial.Initial;
 import tony.project.language.interfaces.InstructorDM;
 
 @DynamoDBTable(tableName="Instructor")
@@ -103,10 +106,26 @@ public class Instructor extends RootObject<Instructor> implements InstructorDM {
 				.withComparisonOperator(ComparisonOperator.EQ)
 				.withAttributeValueList(new AttributeValue().withN(Integer.toString(upload)));
 		
-		List<Instructor> instructors = InstructorDM.scanByUpload(condition);
+		List<Instructor> instructors = scanByUpload(condition);
 		
 		return instructors;
 		
 	}
+
+	private List<Instructor> scanByUpload(Condition condition){
+		
+		DynamoDBMapper mapper = Initial.getMapper();
+		
+		DynamoDBScanExpression scanExpression = 
+				new DynamoDBScanExpression();
+		
+		scanExpression.addFilterCondition("Upload", condition);
+
+		List<Instructor> scanResult = mapper.scan(Instructor.class, scanExpression);
+	
+		
+		return scanResult;
+	}
+	
 	
 }

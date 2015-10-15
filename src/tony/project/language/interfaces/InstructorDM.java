@@ -19,19 +19,6 @@ public interface InstructorDM {
 	
 	public List<Instructor> loadInstructorByUpload(Integer upload);
 	
-	static List<Instructor> scanByUpload(Condition condition){
-		
-		DynamoDBMapper mapper = Initial.getMapper();
-		
-		DynamoDBScanExpression scanExpression = 
-				new DynamoDBScanExpression();
-		
-		scanExpression.addFilterCondition("Upload", condition);
-
-		List<Instructor> scanResult = mapper.scan(Instructor.class, scanExpression);
 	
-		
-		return scanResult;
-	}
 	
 }

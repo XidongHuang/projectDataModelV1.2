@@ -5,11 +5,14 @@ import java.util.List;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
 import com.amazonaws.services.dynamodbv2.model.Condition;
 
+import tony.project.language.initial.Initial;
 import tony.project.language.interfaces.StaffDM;
 
 @DynamoDBTable(tableName="Staff")
@@ -98,7 +101,7 @@ public class Staff extends RootObject<Staff> implements StaffDM{
 				.withComparisonOperator(ComparisonOperator.EQ)
 				.withAttributeValueList(new AttributeValue().withS(accountName));
 		
-		List<Staff> staffs = StaffDM.scanByAccountName(condition);
+		List<Staff> staffs = scanByAccountName(condition);
 		if(staffs.size() == 1){
 			staff = staffs.get(0);
 			
@@ -107,6 +110,19 @@ public class Staff extends RootObject<Staff> implements StaffDM{
 		return staff;
 		
 		
+	}
+	
+	private List<Staff> scanByAccountName(Condition condition){
+		DynamoDBMapper mapper = Initial.getMapper();
+		
+		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+		
+		scanExpression.addFilterCondition("AccountName-index", condition);
+		
+		List<Staff> scanResult = mapper.scan(Staff.class, scanExpression);
+		
+		
+		return scanResult;
 	}
 	
 	

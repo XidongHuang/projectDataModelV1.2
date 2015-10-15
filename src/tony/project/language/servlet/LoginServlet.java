@@ -38,7 +38,8 @@ public class LoginServlet extends HttpServlet {
 		
 	}
 	
-	public void login(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+	
 		
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("Password");
@@ -50,14 +51,21 @@ public class LoginServlet extends HttpServlet {
 		
 		if(userName.equals(staff.getAccountName())){
 			if(password.equals(staff.getPassword())){
+				System.out.println("Hi");
+				System.out.println(staff.getAuthority().equals(0));
 				if(staff.getAuthority().equals(1)){
-					request.setAttribute("staff", staff);
-					request.getRequestDispatcher(request.getContextPath()+"/WEB-INF/users/Instructor.jsp");
+					request.setAttribute("staff", staff.getStaffName());
+					String path = "/users/Instructors.jsp";
+					System.out.println(path);
+					request.getRequestDispatcher(path).forward(request, response);
 					return;
 				}
-				if(staff.getAuthority().equals(1)){
-					request.setAttribute("staff", staff);
-					request.getRequestDispatcher(request.getContextPath()+"/WEB-INF/users/HOE.jsp");
+				if(staff.getAuthority().equals(0)){
+					System.out.println("Hii");
+					request.setAttribute("staff", staff.getStaffName());
+					String path = "/users/HOE.jsp";
+					System.out.println(path);
+					request.getRequestDispatcher(path).forward(request, response);
 					return;
 				}
 			}
