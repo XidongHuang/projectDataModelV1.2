@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.amazonaws.util.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import tony.project.language.domain.Staff;
 import tony.project.language.interfaces.StaffDM;
 
@@ -47,14 +50,18 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(password);
 		Staff staff = staffDM.loadStaffByAccountName(userName);
 		System.out.println(staff);
-		System.out.println(userName.equals(staff.getAccountName()));
+
+		ObjectMapper jsonMapper = new ObjectMapper();
+		String json = jsonMapper.writeValueAsString(staff);
+		String fjson = "["+json+"]";
+		System.out.println(fjson);
 		
 		if(userName.equals(staff.getAccountName())){
 			if(password.equals(staff.getPassword())){
 				System.out.println("Hi");
 				System.out.println(staff.getAuthority().equals(0));
 				if(staff.getAuthority().equals(1)){
-					request.setAttribute("staff", staff.getStaffName());
+					request.setAttribute("staff", fjson);
 					String path = "/users/Instructors.jsp";
 					System.out.println(path);
 					request.getRequestDispatcher(path).forward(request, response);
@@ -62,7 +69,7 @@ public class LoginServlet extends HttpServlet {
 				}
 				if(staff.getAuthority().equals(0)){
 					System.out.println("Hii");
-					request.setAttribute("staff", staff.getStaffName());
+					request.setAttribute("staff", fjson);
 					String path = "/users/HOE.jsp";
 					System.out.println(path);
 					request.getRequestDispatcher(path).forward(request, response);
@@ -72,7 +79,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		response.sendRedirect(request.getContextPath()+"/WEB-INF/Login.jsp");
-		
+		//csv
 	}
 	
 
