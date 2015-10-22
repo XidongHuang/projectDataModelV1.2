@@ -23,7 +23,7 @@ public class RootObject<T> {
 	private static DynamoDBMapper mapper;
 
 	private static ObjectMapper objectMapper;
-	
+
 	private Class<T> clazz;
 
 	public RootObject() {
@@ -190,11 +190,11 @@ public class RootObject<T> {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public T getAnObjectFromJSON(String json) {
 
 		T object = null;
+		objectMapper = new ObjectMapper();
 
 		try {
 
@@ -218,36 +218,47 @@ public class RootObject<T> {
 		return object;
 	}
 
-	public List<T> getObjectsFromJSON(String json){
-		
+	public List<T> getObjectsFromJSON(String json) {
+
 		List<T> objects = null;
-		
-		
+		objectMapper = new ObjectMapper();
+
 		try {
-			System.out.println(json);
-			System.out.println(clazz.getName());
-			System.out.println();
-			objects = objectMapper.readValue(json, new TypeReference<List<T>>() {});
-			System.out.println(objects==null);
+
+//			System.out.println(json);
+//			System.out.println(clazz.getName());
+//			T object = (T) getClass().newInstance();
+//			System.out.println(object instanceof ScoresDetail);
+//			System.out.println();
+			objects = objectMapper.readValue(json, new TypeReference<List<T>>(){});;
+//			System.out.println(objects == null);
+
 		} catch (JsonParseException e) {
-			
+
+			System.err.println(e.getMessage());
 			e.printStackTrace();
-			
+
 		} catch (JsonMappingException e) {
-			
+
+			System.err.println(e.getMessage());
 			e.printStackTrace();
-			
+
 		} catch (IOException e) {
-			
+
+			System.err.println(e.getMessage());
 			e.printStackTrace();
-			
-		}
-		
-		
-		
+
+		} 
+//			catch (InstantiationException e) {
+//			System.err.println(e.getMessage());
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			System.err.println(e.getMessage());
+//			e.printStackTrace();
+//		}
+
 		return objects;
-		
+
 	}
-	
 
 }
