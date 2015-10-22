@@ -1,5 +1,7 @@
 package tony.project.language.interfaces;
 
+import java.util.List;
+
 import tony.project.language.domain.ScoresDetail;
 
 public interface ScoresDetailDM {
@@ -9,5 +11,7 @@ public interface ScoresDetailDM {
 	public ScoresDetail loadAScore(Integer studentID, String courseCode);
 
 	public void deleteAScore(Integer studentID, String courseCode);
+	
+	public List<ScoresDetail> getScoresDetailFromJSON(String json);
 
 }

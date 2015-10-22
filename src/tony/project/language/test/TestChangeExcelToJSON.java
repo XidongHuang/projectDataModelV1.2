@@ -1,13 +1,19 @@
 package tony.project.language.test;
 
+import java.util.List;
+
 import org.junit.Test;
 
+import tony.project.language.domain.ScoresDetail;
 import tony.project.language.formatter.ExcelToJSON;
 import tony.project.language.interfaces.ExcelToJSONOM;
+import tony.project.language.interfaces.ScoresDetailDM;
 
 public class TestChangeExcelToJSON {
 
 	ExcelToJSONOM excelToJSONOM = new ExcelToJSON();
+	
+	ScoresDetailDM scoresDetailDM = new ScoresDetail();
 	
 	@Test
 	public void testPOI(){
@@ -16,6 +22,8 @@ public class TestChangeExcelToJSON {
 		
 		System.out.println(excelJson);
 		
+		List<ScoresDetail> scores = scoresDetailDM.getScoresDetailFromJSON(excelJson);
+		System.out.println(scores);
 		
 	}
 	

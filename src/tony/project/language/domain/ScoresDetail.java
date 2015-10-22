@@ -1,5 +1,7 @@
 package tony.project.language.domain;
 
+import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
@@ -266,6 +268,13 @@ public class ScoresDetail extends RootObject<ScoresDetail> implements ScoresDeta
 	
 		deleteByMapper(studentID, courseCode);
 		
+	}
+	@Override
+	public List<ScoresDetail> getScoresDetailFromJSON(String json) {
+
+		List<ScoresDetail> scoresDetails = getObjectsFromJSON(json);
+		
+		return scoresDetails;
 	}
 
 
