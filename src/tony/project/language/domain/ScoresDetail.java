@@ -1,8 +1,10 @@
 package tony.project.language.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.type.TypeReference;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
@@ -270,11 +272,11 @@ public class ScoresDetail extends RootObject<ScoresDetail> implements ScoresDeta
 		
 	}
 	@Override
-	public List<ScoresDetail> getScoresDetailFromJSON(String json) {
+	public ArrayList<ScoresDetail> getScoresDetailFromJSON(String json) {
 
-		List<ScoresDetail> scoresDetails = getObjectsFromJSON(json);
+		List<ScoresDetail> scoresDetails = getObjectsFromJSON(json, new TypeReference<List<ScoresDetail>>() {});
 		
-		return scoresDetails;
+		return (ArrayList<ScoresDetail>) scoresDetails;
 	}
 
 

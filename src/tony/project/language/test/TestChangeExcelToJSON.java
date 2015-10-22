@@ -27,7 +27,7 @@ public class TestChangeExcelToJSON {
 		
 		String excelJson = excelToJSONOM.getJSON("/home/tony/Desktop/Spread_Sheet_Simple/2015 Winter_Final Marks_L1_Grammar_Ildiko Horvath.xlsx");
 		
-//		System.out.println(excelJson);
+		System.out.println(excelJson);
 		
 		try {
 			
@@ -48,8 +48,17 @@ public class TestChangeExcelToJSON {
 			
 		}
 		
-		List<ScoresDetail> scores = scoresDetailDM.getScoresDetailFromJSON(excelJson);
-		System.out.println(scores);
+//		List<ScoresDetail> scores = scoresDetailDM.getScoresDetailFromJSON(excelJson);
+//
+//		for(ScoresDetail score:scores){
+//			
+//			score.setCourseCode("15WinL1Gar");
+//			scoresDetailDM.saveAScore(score);
+//		}
+//		System.out.println(scores);
+
+		ScoresDetail s = scoresDetailDM.loadAScore(907435252, "15WinL1Gar");
+		System.out.println(s);
 		
 	}
 	

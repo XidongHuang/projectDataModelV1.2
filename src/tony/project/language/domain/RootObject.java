@@ -5,6 +5,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import org.aspectj.weaver.tools.GeneratedClassHandler;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -218,7 +219,7 @@ public class RootObject<T> {
 		return object;
 	}
 
-	public List<T> getObjectsFromJSON(String json) {
+	public List<T> getObjectsFromJSON(String json, TypeReference typeReference) {
 
 		List<T> objects = null;
 		objectMapper = new ObjectMapper();
@@ -230,8 +231,9 @@ public class RootObject<T> {
 //			T object = (T) getClass().newInstance();
 //			System.out.println(object instanceof ScoresDetail);
 //			System.out.println();
-			objects = objectMapper.readValue(json, new TypeReference<List<T>>(){});;
-//			System.out.println(objects == null);
+			objects = objectMapper.readValue(json, typeReference);;
+//			
+			System.out.println(objects);
 
 		} catch (JsonParseException e) {
 
@@ -257,6 +259,7 @@ public class RootObject<T> {
 //			e.printStackTrace();
 //		}
 
+		System.out.println(objects);
 		return objects;
 
 	}
