@@ -11,11 +11,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
+import tony.project.language.interfaces.ExcelToJSONOM;
 import tony.project.language.interfaces.ScoresDetailDM;
 
 
 @DynamoDBTable(tableName="ScoresDetail")
-public class ScoresDetail extends RootObject<ScoresDetail> implements ScoresDetailDM{
+public class ScoresDetail extends RootObject<ScoresDetail> implements ScoresDetailDM {
 
 	
 	@JsonProperty("Attendance")

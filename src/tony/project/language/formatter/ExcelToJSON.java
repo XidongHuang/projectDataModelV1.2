@@ -16,21 +16,21 @@ import tony.project.language.interfaces.ExcelToJSONOM;
 
 public class ExcelToJSON implements ExcelToJSONOM {
 
-	private int rowCount = 0;
 	private String json;
 
 	private Map<String, String> item;
 	private List<String> attributes;
 	private List<String> values;
 	private List<Map<String, String>> jsons;
-
+	
 	private File file;
 	private FileInputStream fileInputStream;
-	private XSSFWorkbook workbook;
 	private XSSFSheet sheet;
+	private XSSFWorkbook workbook;
 
 	@Override
 	public String getJSON(String excelPath) {
+		int rowCount = 0;
 
 		try {
 
@@ -66,7 +66,8 @@ public class ExcelToJSON implements ExcelToJSONOM {
 					}
 
 				} // finished all cells in one row
-
+				
+				
 				if (rowCount > 1 && attributes.size() == values.size()) {
 
 					getItem();
@@ -74,7 +75,10 @@ public class ExcelToJSON implements ExcelToJSONOM {
 
 				} // finished putting one item in json
 
+				
 				values.clear();
+				
+				
 				rowCount++;
 
 			} // finished all rows in one sheet
@@ -87,6 +91,7 @@ public class ExcelToJSON implements ExcelToJSONOM {
 
 		} finally {
 
+			
 			try {
 				fileInputStream.close();
 			} catch (Exception e2) {

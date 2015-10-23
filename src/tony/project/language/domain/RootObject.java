@@ -226,40 +226,22 @@ public class RootObject<T> {
 
 		try {
 
-//			System.out.println(json);
-//			System.out.println(clazz.getName());
-//			T object = (T) getClass().newInstance();
-//			System.out.println(object instanceof ScoresDetail);
-//			System.out.println();
-			objects = objectMapper.readValue(json, typeReference);;
-//			
-			System.out.println(objects);
+			objects = objectMapper.readValue(json, typeReference);
 
 		} catch (JsonParseException e) {
 
-			System.err.println(e.getMessage());
 			e.printStackTrace();
 
 		} catch (JsonMappingException e) {
 
-			System.err.println(e.getMessage());
 			e.printStackTrace();
 
 		} catch (IOException e) {
 
-			System.err.println(e.getMessage());
 			e.printStackTrace();
 
-		} 
-//			catch (InstantiationException e) {
-//			System.err.println(e.getMessage());
-//			e.printStackTrace();
-//		} catch (IllegalAccessException e) {
-//			System.err.println(e.getMessage());
-//			e.printStackTrace();
-//		}
+		}
 
-		System.out.println(objects);
 		return objects;
 
 	}

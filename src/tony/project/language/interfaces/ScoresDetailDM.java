@@ -14,5 +14,7 @@ public interface ScoresDetailDM {
 	public void deleteAScore(Integer studentID, String courseCode);
 	
 	public ArrayList<ScoresDetail> getScoresDetailFromJSON(String json);
+	
+	
 
 }
