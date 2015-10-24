@@ -2,6 +2,7 @@ package tony.project.language.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.type.TypeReference;
@@ -34,6 +35,11 @@ public class ScoresDetail extends RootObject<ScoresDetail> implements ScoresDeta
 	@JsonProperty("FinalMarks")
 	private String FinalMarks;
 
+	
+	
+	private Map<String, String> scoresDetails;//for all scores that may in different
+	
+	
 	
 	@JsonProperty("FinalExam")
 	private String FinalExam;
