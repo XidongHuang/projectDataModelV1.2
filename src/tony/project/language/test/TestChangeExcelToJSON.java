@@ -96,14 +96,18 @@ public class TestChangeExcelToJSON {
 		//Arrays.asList();
 		
 		
-		for(ScoresDetail score:scores){
-			
-			score.setCourseCode("15WinL1Gar");
-			scoresDetailDM.saveAScore(score);
-		}
+//		for(ScoresDetail score:scores){
+//			
+//			score.setCourseCode("15WinL1Gar");
+//			scoresDetailDM.saveAScore(score);
+//		}
 		
 		
 		System.out.println(scores);
+		ScoresDetail s1 = scoresDetailDM.loadAScore(907435252, "15WinL1Gar");
+		ScoresDetail s2 = scoresDetailDM.loadAScore(525445445, "15WinL1Gar");
+		System.out.println(s1);
+		System.out.println(mapper.writeValueAsString(Arrays.asList(s1, s2)));
 		
 	}	
 	

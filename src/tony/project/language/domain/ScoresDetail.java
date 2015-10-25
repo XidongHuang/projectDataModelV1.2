@@ -12,6 +12,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
+import tony.project.language.formatter.JSONFormatter;
+import tony.project.language.interfaces.JSONFormatterOM;
 import tony.project.language.interfaces.ScoresDetailDM;
 
 @DynamoDBTable(tableName = "ScoresDetail")
@@ -97,8 +99,11 @@ public class ScoresDetail extends RootObject<ScoresDetail>implements ScoresDetai
 	@Override
 	public ArrayList<ScoresDetail> getScoresDetailFromJSON(String json) {
 
+		JSONFormatterOM jsonFormatterOM = new JSONFormatter(); 
+		String formattedJSON = jsonFormatterOM.formatJSON(json);
+		
 		List<ScoresDetail> scoresDetails = 
-				getObjectsFromJSON(json, new TypeReference<List<ScoresDetail>>() {});
+				getObjectsFromJSON(formattedJSON, new TypeReference<List<ScoresDetail>>() {});
 
 		return (ArrayList<ScoresDetail>) scoresDetails;
 	}
