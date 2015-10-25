@@ -2,6 +2,7 @@ package tony.project.language.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +30,7 @@ public class TestChangeExcelToJSON {
 	List<Map<String, String>> objectJSON = new ArrayList<>();
 	Map<String, String> grades =  new JSONHashMap<>();
 	
-	Map<String, String> requiredField = new JSONHashMap<>();
+	Map<String, String> requiredField = null;
 	
 	@Test
 	public void testPOI() throws JsonParseException, JsonMappingException, IOException{
@@ -41,11 +42,11 @@ public class TestChangeExcelToJSON {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
-		List<Map<String, String>> jsons = mapper.readValue(excelJson2, List.class);
+		List<Map<String, String>> jsons = mapper.readValue(excelJson, List.class);
 		
 		
 		
-		System.out.println(jsons);
+//		System.out.println("--"+jsons);
 		Iterator it = jsons.iterator();
 		
 		while(it.hasNext()){
@@ -55,9 +56,14 @@ public class TestChangeExcelToJSON {
 			
 			Iterator mapIt = item.entrySet().iterator();
 			
+			requiredField = new JSONHashMap<>();
 			
 			while(mapIt.hasNext()) {
+				
+//				System.out.println(mapIt.next());
+				
 				Map.Entry<String,String> e = (Entry) mapIt.next();
+				
 				if(e.getKey().equals("StudentID") || e.getKey().equals("FirstName")
 						|| e.getKey().equals("Surname")){
 					
@@ -67,11 +73,14 @@ public class TestChangeExcelToJSON {
 					
 					grades.put(e.getKey(), e.getValue());
 					requiredField.put("Grades", grades.toString());
+					
 				}
 				
 			}
-			
+//			System.out.println(requiredField);
 			objectJSON.add(requiredField);
+//			System.out.println();
+//			System.out.println(objectJSON);
 		}
 		
 		
@@ -81,67 +90,22 @@ public class TestChangeExcelToJSON {
 		
 		
 		
-		
 		List<ScoresDetail> scores = scoresDetailDM.getScoresDetailFromJSON(oj);
 		System.out.println(scores);
-//
-//		for(ScoresDetail score:scores){
-//			
-//			score.setCourseCode("15WinL1Gar");
-//			scoresDetailDM.saveAScore(score);
-//		}
-//		System.out.println(scores);
+
+		//Arrays.asList();
+		
+		
+		for(ScoresDetail score:scores){
+			
+			score.setCourseCode("15WinL1Gar");
+			scoresDetailDM.saveAScore(score);
+		}
+		
+		
+		System.out.println(scores);
 		
 	}	
-		
-//		ObjectMapper mapper = new ObjectMapper();
-//		JsonFactory jsonFactory = new MappingJsonFactory();
-//		try {
-//			@SuppressWarnings("deprecation")
-//			JsonParser parser = jsonFactory.createJsonParser(excelJson);
-//			JsonNode ob = mapper.readTree(excelJson);
-//			System.out.println(ob);
-//			
-//			while(parser.nextToken() != JsonToken.END_OBJECT){
-//				parser.nextToken();
-//				Map<String, String> item = new JSONHashMap<>();
-//				System.out.println(parser.getCurrentName());
-//				if(parser.getCurrentName().equals("StudentID") || parser.getCurrentName().equals("FirstName")
-//						|| parser.getCurrentName().equals("Surname")){
-//					
-//					item.put(parser.getCurrentName(), parser.getText());
-//					objectJSON.add(item);
-//					
-//				} else {
-//					
-//					grades.put(parser.getCurrentName(), parser.getText());
-//					
-//					
-//				}
-//				
-//				
-//				
-//			}
-//			
-//			objectJSON.add(grades);
-//			
-//		} catch (JsonParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 
-//		
-//		System.out.println(objectJSON);
-//		
-		
-		
-//
-//		ScoresDetail s = scoresDetailDM.loadAScore(907435252, "15WinL1Gar");
-//		System.out.println(s);
-//		
-//	}
 	
 
 }

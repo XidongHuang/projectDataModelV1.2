@@ -44,7 +44,6 @@ public class ScoresDetail extends RootObject<ScoresDetail>implements ScoresDetai
 	public Integer getStudentID() {return StudentID;}
 	public void setStudentID(Integer studentID) {StudentID = studentID;}
 
-//	@JsonProperty("Grades")
 	@DynamoDBAttribute(attributeName="Grades")
 	public Map<String, String> getGrades() {return Grades;}
 	public void setGrades(Map<String, String> grades) {Grades = grades;}

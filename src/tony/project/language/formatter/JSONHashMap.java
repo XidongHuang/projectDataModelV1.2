@@ -30,7 +30,7 @@ public class JSONHashMap<K, V> extends HashMap {
 			K key = item.getKey();
 			V value = item.getValue();
 
-			if (value instanceof String && ((String) value).startsWith("{")) {
+			if (value instanceof String && ((String) value).trim().startsWith("{")) {
 
 				buffer.append(key == this ? "(this Map)" : "\"" + key + "\"");
 				buffer.append(": ");
