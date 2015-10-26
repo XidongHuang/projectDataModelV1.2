@@ -15,6 +15,7 @@ public interface ScoresDetailDM {
 	
 	public ArrayList<ScoresDetail> getScoresDetailFromJSON(String json);
 	
+	public void batchSaveScoresDetail(List<ScoresDetail> socresList);
 	
 
 }

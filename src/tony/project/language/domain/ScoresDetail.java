@@ -34,30 +34,55 @@ public class ScoresDetail extends RootObject<ScoresDetail>implements ScoresDetai
 	@JsonProperty("CourseCode")
 	private String CourseCode;
 
-	@DynamoDBAttribute(attributeName="FirstName")
-	public String getFirstName() {return FirstName;}
-	public void setFirstName(String firstName) {FirstName = firstName;}
+	@DynamoDBAttribute(attributeName = "FirstName")
+	public String getFirstName() {
+		return FirstName;
+	}
 
-	@DynamoDBAttribute(attributeName="Surname")
-	public String getSurname() {return Surname;}
-	public void setSurname(String surname) {Surname = surname;}
+	public void setFirstName(String firstName) {
+		FirstName = firstName;
+	}
 
-	@DynamoDBHashKey(attributeName="StudentID")
-	public Integer getStudentID() {return StudentID;}
-	public void setStudentID(Integer studentID) {StudentID = studentID;}
+	@DynamoDBAttribute(attributeName = "Surname")
+	public String getSurname() {
+		return Surname;
+	}
 
-	@DynamoDBAttribute(attributeName="Grades")
-	public Map<String, String> getGrades() {return Grades;}
-	public void setGrades(Map<String, String> grades) {Grades = grades;}
+	public void setSurname(String surname) {
+		Surname = surname;
+	}
 
-	@DynamoDBRangeKey(attributeName="CourseCode")
-	public String getCourseCode() {return CourseCode;}
-	public void setCourseCode(String courseCode) {CourseCode = courseCode;}
+	@DynamoDBHashKey(attributeName = "StudentID")
+	public Integer getStudentID() {
+		return StudentID;
+	}
+
+	public void setStudentID(Integer studentID) {
+		StudentID = studentID;
+	}
+
+	@DynamoDBAttribute(attributeName = "Grades")
+	public Map<String, String> getGrades() {
+		return Grades;
+	}
+
+	public void setGrades(Map<String, String> grades) {
+		Grades = grades;
+	}
+
+	@DynamoDBRangeKey(attributeName = "CourseCode")
+	public String getCourseCode() {
+		return CourseCode;
+	}
+
+	public void setCourseCode(String courseCode) {
+		CourseCode = courseCode;
+	}
 
 	public ScoresDetail() {
 		super();
 	}
-	
+
 	public ScoresDetail(String firstName, String surname, Integer studentID, Map<String, String> grades,
 			String courseCode) {
 		super();
@@ -67,13 +92,13 @@ public class ScoresDetail extends RootObject<ScoresDetail>implements ScoresDetai
 		Grades = grades;
 		CourseCode = courseCode;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ScoresDetail [FirstName=" + FirstName + ", Surname=" + Surname + ", StudentID=" + StudentID
 				+ ", Grades=" + Grades + ", CourseCode=" + CourseCode + "]";
 	}
-	
+
 	@Override
 	public void saveAScore(ScoresDetail score) {
 
@@ -99,13 +124,34 @@ public class ScoresDetail extends RootObject<ScoresDetail>implements ScoresDetai
 	@Override
 	public ArrayList<ScoresDetail> getScoresDetailFromJSON(String json) {
 
-		JSONFormatterOM jsonFormatterOM = new JSONFormatter(); 
+		JSONFormatterOM jsonFormatterOM = new JSONFormatter();
 		String formattedJSON = jsonFormatterOM.formatJSON(json);
-		
-		List<ScoresDetail> scoresDetails = 
-				getObjectsFromJSON(formattedJSON, new TypeReference<List<ScoresDetail>>() {});
+
+		List<ScoresDetail> scoresDetails = getObjectsFromJSON(formattedJSON, new TypeReference<List<ScoresDetail>>() {
+		});
 
 		return (ArrayList<ScoresDetail>) scoresDetails;
+	}
+
+	@Override
+	public void batchSaveScoresDetail(List<ScoresDetail> scoresList) {
+
+		ScoresDetail[] scoresArray = formatListToArray(scoresList);
+		batchSaveObjects(scoresArray);
+
+	}
+	
+	//Need to set up HashKey and RangeKey firstly
+	private ScoresDetail[] formatListToArray(List<ScoresDetail> scoresList) {
+
+		ScoresDetail[] sArray = new ScoresDetail[scoresList.size()];
+
+		for (int i = 0; i < sArray.length; i++) {
+
+			sArray[i] = scoresList.get(i);
+		}
+
+		return sArray;
 	}
 
 }

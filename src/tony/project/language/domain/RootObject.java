@@ -3,9 +3,10 @@ package tony.project.language.domain;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
-import org.aspectj.weaver.tools.GeneratedClassHandler;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -14,6 +15,7 @@ import org.codehaus.jackson.type.TypeReference;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.sun.org.apache.xml.internal.security.Init;
 
 import tony.project.language.initial.Initial;
 
@@ -50,8 +52,7 @@ public class RootObject<T> {
 
 	public void saveByMapper(T entity) {
 		try {
-			client = Initial.getClient();
-			mapper = new DynamoDBMapper(client);
+			mapper = Initial.getMapper();
 			mapper.save(entity);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,43 +62,37 @@ public class RootObject<T> {
 	}
 
 	public T loadByMapper(Integer hashKey) {
-		client = Initial.getClient();
-		mapper = new DynamoDBMapper(client);
-
+		mapper = Initial.getMapper();
 		return mapper.load(clazz, hashKey);
 	}
 
 	public T loadByMapper(String hashKey) {
-		client = Initial.getClient();
-		mapper = new DynamoDBMapper(client);
-
+		mapper = Initial.getMapper();
 		return mapper.load(clazz, hashKey);
 	}
 
 	public T loadByMapper(String hashKey, String rangeKey) {
-		client = Initial.getClient();
-		mapper = new DynamoDBMapper(client);
-
+		mapper = Initial.getMapper();
 		return mapper.load(clazz, hashKey, rangeKey);
 	}
 
 	public T loadByMapper(Integer hashKey, String rangeKey) {
-		client = Initial.getClient();
-		mapper = new DynamoDBMapper(client);
+
+		mapper = Initial.getMapper();
 
 		return mapper.load(clazz, hashKey, rangeKey);
 	}
 
 	public T loadByMapper(String hashKey, Integer rangeKey) {
-		client = Initial.getClient();
-		mapper = new DynamoDBMapper(client);
+
+		mapper = Initial.getMapper();
 
 		return mapper.load(clazz, hashKey, rangeKey);
 	}
 
 	public T loadByMapper(Integer hashKey, Integer rangeKey) {
-		client = Initial.getClient();
-		mapper = new DynamoDBMapper(client);
+
+		mapper = Initial.getMapper();
 
 		return mapper.load(clazz, hashKey, rangeKey);
 	}
@@ -106,8 +101,7 @@ public class RootObject<T> {
 		T item = null;
 
 		try {
-			client = Initial.getClient();
-			mapper = new DynamoDBMapper(client);
+			mapper = Initial.getMapper();
 			item = loadByMapper(hashKey);
 
 			mapper.delete(item);
@@ -121,8 +115,7 @@ public class RootObject<T> {
 		T item = null;
 
 		try {
-			client = Initial.getClient();
-			mapper = new DynamoDBMapper(client);
+			mapper = Initial.getMapper();
 			item = loadByMapper(hashKey);
 
 			mapper.delete(item);
@@ -136,7 +129,6 @@ public class RootObject<T> {
 		T item = null;
 
 		try {
-			client = Initial.getClient();
 			mapper = new DynamoDBMapper(client);
 			item = loadByMapper(hashKey, rangeKey);
 
@@ -151,8 +143,7 @@ public class RootObject<T> {
 		T item = null;
 
 		try {
-			client = Initial.getClient();
-			mapper = new DynamoDBMapper(client);
+			mapper = Initial.getMapper();
 			item = loadByMapper(hashKey, rangeKey);
 
 			mapper.delete(item);
@@ -166,8 +157,7 @@ public class RootObject<T> {
 		T item = null;
 
 		try {
-			client = Initial.getClient();
-			mapper = new DynamoDBMapper(client);
+			mapper = Initial.getMapper();
 			item = loadByMapper(hashKey, rangeKey);
 
 			mapper.delete(item);
@@ -181,8 +171,7 @@ public class RootObject<T> {
 		T item = null;
 
 		try {
-			client = Initial.getClient();
-			mapper = new DynamoDBMapper(client);
+			mapper = Initial.getMapper();
 			item = loadByMapper(hashKey, rangeKey);
 
 			mapper.delete(item);
@@ -243,6 +232,17 @@ public class RootObject<T> {
 		}
 
 		return objects;
+
+	}
+
+	public void batchSaveObjects(T[] objectList) {
+
+		try {
+			mapper = Initial.getMapper();
+			mapper.batchSave(Arrays.asList(objectList));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
