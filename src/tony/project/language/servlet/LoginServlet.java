@@ -44,41 +44,48 @@ public class LoginServlet extends HttpServlet {
 	public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 	
 		
-		String userName = request.getParameter("userName");
-		String password = request.getParameter("Password");
+		String userName = request.getParameter("username");
+		String password = request.getParameter("password");
 		System.out.println(userName);
 		System.out.println(password);
-		Staff staff = staffDM.loadStaffByAccountName(userName);
-		System.out.println(staff);
-
-		ObjectMapper jsonMapper = new ObjectMapper();
-		String json = jsonMapper.writeValueAsString(staff);
-		String fjson = "["+json+"]";
-		System.out.println(fjson);
 		
-		if(userName.equals(staff.getAccountName())){
-			if(password.equals(staff.getPassword())){
-				System.out.println("Hi");
-				System.out.println(staff.getAuthority().equals(0));
-				if(staff.getAuthority().equals(1)){
-					request.setAttribute("staff", fjson);
-					String path = "/users/Instructors.jsp";
-					System.out.println(path);
-					request.getRequestDispatcher(path).forward(request, response);
-					return;
-				}
-				if(staff.getAuthority().equals(0)){
-					System.out.println("Hii");
-					request.setAttribute("staff", fjson);
-					String path = "/users/HOE.jsp";
-					System.out.println(path);
-					request.getRequestDispatcher(path).forward(request, response);
-					return;
+		
+		try {
+			Staff staff = staffDM.loadStaffByAccountName(userName);
+			System.out.println(staff);
+
+//		ObjectMapper jsonMapper = new ObjectMapper();
+//		String json = jsonMapper.writeValueAsString(staff);
+//		String fjson = "["+json+"]";
+//		System.out.println(fjson);
+			
+			if(userName.equals(staff.getAccountName())){
+				if(password.equals(staff.getPassword())){
+					System.out.println("Hi");
+					System.out.println(staff.getAuthority().equals(0));
+					if(staff.getAuthority().equals(1)){
+//					request.setAttribute("staff", fjson);
+						String path = "/index.html";
+						System.out.println(path);
+						request.getRequestDispatcher(path).forward(request, response);
+						return;
+					}
+					if(staff.getAuthority().equals(0)){
+						System.out.println("Hii");
+//					request.setAttribute("staff", fjson);
+						String path = "/index.html";
+						System.out.println(path);
+						request.getRequestDispatcher(path).forward(request, response);
+						return;
+					}
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		response.sendRedirect(request.getContextPath()+"/WEB-INF/Login.jsp");
+		System.out.println(request.getContextPath()+"/login.html");
+		response.sendRedirect(request.getContextPath()+"/login.html");
 		//csv
 	}
 	

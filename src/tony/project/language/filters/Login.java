@@ -25,7 +25,7 @@ public class Login extends HttpFilter implements Filter {
 
 		
 		 System.out.println("Again");
-		List<String> uncheckedURL = Arrays.asList("/Login.jsp");
+		List<String> uncheckedURL = Arrays.asList("/login.html");
 
 		String servletPath = request.getServletPath();
 
@@ -41,7 +41,7 @@ public class Login extends HttpFilter implements Filter {
 			chain.doFilter(request, response);
 		}
 
-		response.sendRedirect(request.getContextPath() + "/login.jsp");
+		response.sendRedirect(request.getContextPath() + "/login.html");
 	}
 
 	
